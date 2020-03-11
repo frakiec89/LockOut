@@ -32,6 +32,7 @@
             this.tbPass = new System.Windows.Forms.TextBox();
             this.btIn = new System.Windows.Forms.Button();
             this.lbStatus = new System.Windows.Forms.Label();
+            this.btOpenLog = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbLog
@@ -66,11 +67,22 @@
             this.lbStatus.Size = new System.Drawing.Size(0, 13);
             this.lbStatus.TabIndex = 3;
             // 
+            // btOpenLog
+            // 
+            this.btOpenLog.Location = new System.Drawing.Point(427, 60);
+            this.btOpenLog.Name = "btOpenLog";
+            this.btOpenLog.Size = new System.Drawing.Size(75, 23);
+            this.btOpenLog.TabIndex = 4;
+            this.btOpenLog.Text = "Logi";
+            this.btOpenLog.UseVisualStyleBackColor = true;
+            this.btOpenLog.Click += new System.EventHandler(this.btOpenLog_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btOpenLog);
             this.Controls.Add(this.lbStatus);
             this.Controls.Add(this.btIn);
             this.Controls.Add(this.tbPass);
@@ -88,6 +100,7 @@
         private System.Windows.Forms.TextBox tbPass;
         private System.Windows.Forms.Button btIn;
         private System.Windows.Forms.Label lbStatus;
+        private System.Windows.Forms.Button btOpenLog;
     }
 }
 

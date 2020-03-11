@@ -31,6 +31,9 @@ namespace LockOut
             lbStatus.Text = ""; // выводим  стус при загрузке
             tbLog.Focus(); // ставим фокус  в   поле ввода лгина 
             btIn.Text = "Вход";
+            btOpenLog.Enabled = false;
+            UserControl = new UserController();// вытавикваем пользователей из файла
+            LockOutsController = new LockOutsController(); // вытаскиваем  локауты  из файла
         }
 
         private void btIn_Click(object sender, EventArgs e) // кнопка вход
@@ -58,6 +61,8 @@ namespace LockOut
             {
                 lbStatus.Text = "Добро пожаловать  " + us.Name; // выводим   приведствие   и  имя пользователя 
                 LockOutsController.Add(us); // добавляем   успешный вход  в  локаут
+
+                btOpenLog.Enabled = true;
             }
             else // иначе 
             {
@@ -66,6 +71,7 @@ namespace LockOut
                 lbStatus.Text = "неверный  пароль, осталось  попыток: " +  lockaut  ; // выводим  статус  и колл-во  попыток
             }
 
+          
         }
       /// <summary>
       /// 
@@ -105,6 +111,12 @@ namespace LockOut
             }
                 return countLock - falseList.Count; // возвращаем  число оставшихся попыток 
             
+        }
+
+        private void btOpenLog_Click(object sender, EventArgs e) // логи
+        {
+            LogForm logForm = new LogForm(ref LockOutsController);
+            logForm.ShowDialog();
         }
     }
 }
