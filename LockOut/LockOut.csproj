@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseSerializable.cs" />
     <Compile Include="LockOutcs.cs" />
     <Compile Include="LockOutsController.cs" />
     <Compile Include="LogForm.cs">

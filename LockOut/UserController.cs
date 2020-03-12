@@ -10,7 +10,7 @@ namespace LockOut
     /// <summary>
     /// работа с пользователями  
     /// </summary>
-    public class UserController
+    public class UserController : BaseSerializable
     {
         /// <summary>
         /// список  пользователей
@@ -48,39 +48,16 @@ namespace LockOut
         }
         public  void Save () // сохраняем список  юзеров  в  файл
         {
-            BinaryFormatter formatter = new BinaryFormatter(); // формтарор
-            using (var fille = new FileStream("user.bin", FileMode.OpenOrCreate)) // поток данных  в  файл  
-            {
-              formatter .Serialize(fille, Users); // сириализация 
-            }
-
+            base.Save("User.bin" , Users);
         }
 
         public List <User> Load() //   получаем список  юзеров из файла 
         {
-            BinaryFormatter formatter = new BinaryFormatter(); // формтарор
-
-            using (var fille = new FileStream("user.bin", FileMode.OpenOrCreate)) // поток данных  из  файла   
+            if (base.Load<List<User>>("User.bin").Count == 0)
             {
-
-                try
-                {
-                    var us = formatter.Deserialize(fille); // забираем объект  из  файла
-                    if (us == null) // если файл  пустой
-                    {
-                        return new List<User>(); // создаем пустой  лист
-                    }
-                    else
-                    {
-                        return us as List<User>; // преобразуем объект  в  список листов 
-                    }
-                }
-                catch
-                {
-                    return new List<User>(); // если поток данных пустой создаем пустой  лист
-                }
-            }
-
+                return new List<User>();
+            };
+            return base.Load<List<User>>("User.bin");
         }
 
 

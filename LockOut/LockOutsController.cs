@@ -6,12 +6,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LockOut
+namespace LockOut 
 {
     /// <summary>
     /// работа со  входами
     /// </summary>
-    public class LockOutsController
+    public class LockOutsController : BaseSerializable
     {
         /// <summary>
         /// список  входов
@@ -31,11 +31,7 @@ namespace LockOut
         /// </summary>
         public void Save()
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            using (var fille = new FileStream("lockOuts.bin", FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fille, LockOutcs);
-            }
+            base.Save("Lock.bin", LockOutcs);
           
         }
 
@@ -62,27 +58,11 @@ namespace LockOut
 
         private List<LockOutcs> Load() // получаем список из  файла 
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            using (var fille = new FileStream("lockOuts.bin", FileMode.OpenOrCreate))
-            {
+            if (base.Load<List<LockOutcs>>("Lock.bin")==  null)
+                return new List<LockOutcs>();
 
-                try
-                {
-                    var us = formatter.Deserialize(fille);
-                    if (us == null)
-                    {
-                        return new List<LockOutcs>();
-                    }
-                    else
-                    {
-                        return us as List<LockOutcs>;
-                    }
-                }
-                catch
-                {
-                    return new List<LockOutcs>();
-                }
-            }
+            return base.Load<List<LockOutcs>>("Lock.bin");
+
         }
     }
 }
